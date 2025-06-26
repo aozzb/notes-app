@@ -6,21 +6,33 @@ const clearBtn=document.getElementById("clearBtn");
 
 const displayNote=document.getElementById("displayNote");
 
-displayNote.innerText=localStorage.getItem("note"); //displaying any stored notes
+displayNotes();             //display any existing notes
+
+function displayNotes(){
+    let notes=localStorage.getItem("notes");            //get stored notes as string
+    let notesArray=notes?JSON.parse(notes):[];          //put all pre saved notes into an array otherwise create empty array
+    displayNote.innerHTML="";                           // clear display area
+    notesArray.forEach(function (note){                 //loop through the array containing notes and display them
+        const noteElement=document.createElement("div");
+        noteElement.innerText=note;
+        noteElement.classList.add("note-box");
+        displayNote.appendChild(noteElement);
+    })
+
+}
 
 saveBtn.addEventListener("click", function(){
-    localStorage.setItem("note", textInput.value);
-    displayNote.innerText=localStorage.getItem("note");  //save button functionality 
+    let noteText = textInput.value;                 //get textarea input 
+    let notes=localStorage.getItem("notes");        //obtain any pre saved notes
+    let notesArray=notes?JSON.parse(notes):[];      //put all pre saved notes into an array otherwise create empty array
+    notesArray.push(noteText);                      //push entered note into the array
+    localStorage.setItem("notes", JSON.stringify(notesArray));      //turn array into string and store in localStorage
     textInput.value="";
+    displayNotes();
 })
 
 clearBtn.addEventListener("click", function(){
-    localStorage.removeItem("note");
-    displayNote.innerText=localStorage.getItem("note");
+    localStorage.removeItem("notes");
+    displayNote.innerHTML="";
     textInput.value="";
 })
-
-
-
-
-
