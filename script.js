@@ -12,10 +12,24 @@ function displayNotes(){
     let notes=localStorage.getItem("notes");            //get stored notes as string
     let notesArray=notes?JSON.parse(notes):[];          //put all pre saved notes into an array otherwise create empty array
     displayNote.innerHTML="";                           // clear display area
-    notesArray.forEach(function (note){                 //loop through the array containing notes and display them
+    notesArray.forEach(function (note, index){                 //loop through the array containing notes and display them with a delete button beside each
         const noteElement=document.createElement("div");
         noteElement.innerText=note;
         noteElement.classList.add("note-box");
+
+        const deleteBtn=document.createElement("button");
+        deleteBtn.innerText="Delete";
+        deleteBtn.classList.add("delete-btn");
+
+        deleteBtn.addEventListener("click", function(){
+            let updatedNotes=notesArray;
+            updatedNotes.splice(index, 1);
+            localStorage.setItem("notes", JSON.stringify(updatedNotes));
+            displayNotes();
+        });
+
+        noteElement.appendChild(deleteBtn);
+        
         displayNote.appendChild(noteElement);
     })
 
@@ -29,10 +43,10 @@ saveBtn.addEventListener("click", function(){
     localStorage.setItem("notes", JSON.stringify(notesArray));      //turn array into string and store in localStorage
     textInput.value="";
     displayNotes();
-})
+});
 
 clearBtn.addEventListener("click", function(){
     localStorage.removeItem("notes");
     displayNote.innerHTML="";
     textInput.value="";
-})
+});
