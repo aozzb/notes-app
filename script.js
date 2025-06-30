@@ -1,10 +1,15 @@
+const titleInput=document.getElementById("titleInput");
+
 const textInput=document.getElementById("textInput");
+
+const tagsInput=document.getElementById("tagsInput");
 
 const saveBtn=document.getElementById("saveBtn");
 
 const clearBtn=document.getElementById("clearBtn");
 
 const displayNote=document.getElementById("displayNote");
+
 
 displayNotes();             //display any existing notes
 
@@ -14,7 +19,8 @@ function displayNotes(){
     displayNote.innerHTML="";                           // clear display area
     notesArray.forEach(function (note, index){                 //loop through the array containing notes and display them with a delete button beside each
         const noteElement=document.createElement("div");
-        noteElement.innerText=note;
+        noteElement.innerHTML=`<h3>${note.title}</h3>
+                                <p>${note.content}</p>`;
         noteElement.classList.add("note-box");
 
         const deleteBtn=document.createElement("button");
@@ -27,6 +33,20 @@ function displayNotes(){
             localStorage.setItem("notes", JSON.stringify(updatedNotes));
             displayNotes();
         });
+        
+        if (note.tags && note.tags.length > 0) {
+            const tagsContainer = document.createElement("div");
+            tagsContainer.classList.add("tags");
+
+        note.tags.forEach(tag => {
+        const tagBadge = document.createElement("span");
+        tagBadge.innerText = tag;
+        tagBadge.classList.add("tag-badge");
+        tagsContainer.appendChild(tagBadge);
+        });
+
+        noteElement.appendChild(tagsContainer);
+        }
 
         noteElement.appendChild(deleteBtn);
         
@@ -35,13 +55,31 @@ function displayNotes(){
 
 }
 
-saveBtn.addEventListener("click", function(){
-    let noteText = textInput.value;                 //get textarea input 
+saveBtn.addEventListener("click", function(){                 
     let notes=localStorage.getItem("notes");        //obtain any pre saved notes
     let notesArray=notes?JSON.parse(notes):[];      //put all pre saved notes into an array otherwise create empty array
-    notesArray.push(noteText);                      //push entered note into the array
+
+    let rawTags=tagsInput.value;
+    let tagsArray=rawTags.split(",");
+
+    let cleanedTags=[];
+    tagsArray.forEach(tag => {
+        let trimmed=tag.trim();
+        if(trimmed !== ""){
+            cleanedTags.push(trimmed);
+        }
+    });
+
+    notesArray.push({                               //push entered note into the array
+        title:titleInput.value,
+        content:textInput.value,
+        tags:cleanedTags
+        
+    })                                          
     localStorage.setItem("notes", JSON.stringify(notesArray));      //turn array into string and store in localStorage
     textInput.value="";
+    titleInput.value="";
+    tagsInput.value="";
     displayNotes();
 });
 
