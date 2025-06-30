@@ -38,3 +38,38 @@
   border-radius: 3px;
   cursor: pointer;
 }
+#titleInput {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+#textInput {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  resize: vertical; 
+  min-height: 100px; 
+  box-sizing: border-box; 
+  resize:none;
+}
+#tagsInput {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  margin: 0;
+  box-sizing: border-box;
+}
+.tags {
+  margin-top: 8px;
+}
+
+.tag-badge {
+  display: inline-block;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
