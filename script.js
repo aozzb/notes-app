@@ -2,6 +2,8 @@ const titleInput=document.getElementById("titleInput");
 
 const textInput=document.getElementById("textInput");
 
+const searchInput=document.getElementById("searchInput");
+
 const tagsInput=document.getElementById("tagsInput");
 
 const saveBtn=document.getElementById("saveBtn");
@@ -13,47 +15,54 @@ const displayNote=document.getElementById("displayNote");
 
 displayNotes();             //display any existing notes
 
-function displayNotes(){
+function displayNotes(searchTerm=""){
+    searchTerm=searchTerm.toLowerCase();
+
     let notes=localStorage.getItem("notes");            //get stored notes as string
     let notesArray=notes?JSON.parse(notes):[];          //put all pre saved notes into an array otherwise create empty array
     displayNote.innerHTML="";                           // clear display area
-    notesArray.forEach(function (note, index){                 //loop through the array containing notes and display them with a delete button beside each
-        const noteElement=document.createElement("div");
-        noteElement.innerHTML=`<h3>${note.title}</h3>
-                                <p>${note.content}</p>`;
+    notesArray.forEach(function (note, index) {
+    const titleMatch = note.title.toLowerCase().includes(searchTerm);
+    const contentMatch = note.content.toLowerCase().includes(searchTerm);
+    const tagsMatch = note.tags && note.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+
+    if (titleMatch || contentMatch || tagsMatch) {
+        const noteElement = document.createElement("div");
+        noteElement.innerHTML = `<h3>${note.title}</h3>
+                                 <p>${note.content}</p>`;
         noteElement.classList.add("note-box");
 
-        const deleteBtn=document.createElement("button");
-        deleteBtn.innerText="Delete";
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerText = "Delete";
         deleteBtn.classList.add("delete-btn");
 
-        deleteBtn.addEventListener("click", function(){
-            let updatedNotes=notesArray;
+        deleteBtn.addEventListener("click", function () {
+            let updatedNotes = notesArray;
             updatedNotes.splice(index, 1);
             localStorage.setItem("notes", JSON.stringify(updatedNotes));
-            displayNotes();
+            displayNotes(searchTerm);                           // pass search term again
         });
-        
+
         if (note.tags && note.tags.length > 0) {
             const tagsContainer = document.createElement("div");
             tagsContainer.classList.add("tags");
 
-        note.tags.forEach(tag => {
-        const tagBadge = document.createElement("span");
-        tagBadge.innerText = tag;
-        tagBadge.classList.add("tag-badge");
-        tagsContainer.appendChild(tagBadge);
-        });
+            note.tags.forEach(tag => {
+                const tagBadge = document.createElement("span");
+                tagBadge.innerText = tag;
+                tagBadge.classList.add("tag-badge");
+                tagsContainer.appendChild(tagBadge);
+            });
 
-        noteElement.appendChild(tagsContainer);
+            noteElement.appendChild(tagsContainer);
         }
 
         noteElement.appendChild(deleteBtn);
-        
         displayNote.appendChild(noteElement);
-    })
+    }
+});
 
-}
+};
 
 saveBtn.addEventListener("click", function(){                 
     let notes=localStorage.getItem("notes");        //obtain any pre saved notes
@@ -87,4 +96,10 @@ clearBtn.addEventListener("click", function(){
     localStorage.removeItem("notes");
     displayNote.innerHTML="";
     textInput.value="";
+});
+
+
+searchInput.addEventListener("input", function(){
+    let currentSearch=searchInput.value.toLowerCase();
+    displayNotes(currentSearch);
 });
