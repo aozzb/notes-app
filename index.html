@@ -3,32 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes from aozz</title>
+    <title>Notes by aozz</title>
     <link rel="stylesheet" href="./styles.css"></link>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Notes</h1>
 
-    <input type="text" id="searchInput" class="input-field" placeholder="Search notes...">
-    <br>
-    <label>Enter title:</label>
-    <br>
-    <input type="text" id="titleInput" class="input-field" placeholder="Title">
-    <br>
-    <label>Enter text:</label>
-    <br>
-    <textarea rows="10" cols="20" id="textInput" class="input-field" placeholder="lorem ipsum"></textarea>
-    <br>
-    <label>Enter comma separated tags:</label>
-    <br>
-    <input type="text" id="tagsInput" class="input-field" placeholder="tags">
-    <br>
-    
-    <br>
+    <div id="top-bar">
+        <input type="text" id="searchInput" class="input-field" placeholder="Search notes...">
+        <br>
+        <button type="button" class="button" id="newNoteBtn">New Note</button>
+        <br>
+        <button type="button" id="clearAllBtn">Clear All Notes</button>
+        <br>
+    </div>
 
-    <button type="button" class="button" id="saveBtn">Save</button>
-    <button type="button" class="button" id="clearBtn">Clear</button>
-    <br>
+    <div id="noteInputContainer">
+        <label>Enter title:</label>
+        <br><br>
+        <input type="text" id="titleInput" class="input-field" placeholder="Title">
+        <br>
+        <label>Enter text:</label>
+        <br><br>
+        <textarea rows="10" cols="20" id="textInput" class="input-field" placeholder="lorem ipsum"></textarea>
+        <br>
+        <label>Enter comma separated tags:</label>
+        <br><br>
+        <input type="text" id="tagsInput" class="input-field" placeholder="tags">
+        <br>
+        <br>
+
+        <button type="button" class="button" id="saveBtn">Save</button>
+        <button type="button" class="button" id="clearBtn">Clear Fields</button>
+        <br>
+    </div>
+
     <h3>Saved Note:</h3>
     <div id="displayNote" class="note-box"></div>
     
