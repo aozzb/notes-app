@@ -2,6 +2,10 @@
 
 A minimalist notes-taking web app built using HTML, CSS, and JavaScript. It supports creating, searching, and deleting notes with tags. Notes are stored in `localStorage` so they persist across sessions.
 
+## 🔗 Live Demo
+
+👉 [View on GitHub Pages](https://aozzb.github.io/notes-app/)
+
 ## 🚀 Features
 
 - Add notes with a **title**, **content**, and **comma-separated tags**
@@ -20,15 +24,6 @@ A minimalist notes-taking web app built using HTML, CSS, and JavaScript. It supp
 - JavaScript (Vanilla)
 - [Google Fonts - Quicksand](https://fonts.google.com/specimen/Quicksand)
 
-## 📂 File Structure
-
-project-folder/
-│
-├── index.html # Main HTML file
-├── styles.css # App styling
-├── script.js # All interactivity and storage logic
-└── README.md # You are here
-
 
 ## ✅ How to Use
 
@@ -39,6 +34,7 @@ project-folder/
 5. Use the **Search bar** to find notes by keyword or tag.
 6. Use **Delete** buttons on each note to remove them individually.
 7. Use **Clear All Notes** to wipe everything from localStorage.
+
 
 ## 🧼 Optional Enhancements
 
