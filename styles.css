@@ -1,75 +1,136 @@
-#saveBtn{
-    background-color:lime;
+/* GLOBAL RESET & FONT */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  margin: 0;
+  padding: 1rem;
 }
-#clearBtn{
-    background-color: azure;
+
+/* BUTTONS */
+button {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-.button{
-    cursor: pointer;
+
+#saveBtn {
+  background-color: #0077cc;
+  color: white;
 }
-#displayNote{
-    border:1px;
-    border-radius: 8px;
-    padding:1rem;
-    border-style: solid;
-    background-color: palegoldenrod;
-    text-align: center;
-    max-width: 500px;
+
+#saveBtn:hover {
+  background-color: #005fa3;
 }
+
+#clearBtn {
+  background-color: white;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+#clearBtn:hover {
+  background-color: #e0e0e0;
+}
+
+
+/* DISPLAY AREA */
+#displayNote {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #e9eff5;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+
+/* NOTE CARD */
 .note-box {
-  background-color: #fff8dc;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  word-wrap: break-word;
+  transition: transform 0.2s ease;
   position: relative;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #e0c97f;
-  border-radius: 5px;
-  font-family: sans-serif;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
+
+.note-box:hover {
+  transform: translateY(-4px);
+}
+
+.note-box h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #003366;
+}
+
+.note-box p {
+  margin: 0;
+  color: #444;
+  white-space: pre-wrap;
+}
+
+/* DELETE BUTTON */
 .delete-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: crimson;
+  top: 10px;
+  right: 10px;
+  background-color: #e63946;
   color: white;
+  padding: 5px 10px;
+  font-size: 0.75rem;
   border: none;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 3px;
-  cursor: pointer;
+  border-radius: 4px;
 }
-#titleInput {
-  width: 100%;
-  padding: 8px;
-  font-size: 1rem;
-  box-sizing: border-box;
+
+.delete-btn:hover {
+  background-color: #b91d29;
 }
-#textInput {
-  width: 100%;
-  padding: 8px;
-  font-size: 1rem;
-  resize: vertical; 
-  min-height: 100px; 
-  box-sizing: border-box; 
-  resize:none;
-}
-#tagsInput {
-  width: 100%;
-  padding: 8px;
-  font-size: 1rem;
-  margin: 0;
-  box-sizing: border-box;
-}
+
+/* TAGS */
 .tags {
-  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
 }
 
 .tag-badge {
-  display: inline-block;
-  background-color: #e0e0e0;
-  color: #333;
-  padding: 4px 8px;
-  margin: 2px;
-  border-radius: 12px;
-  font-size: 0.85rem;
+  background-color: #dfe8f2;
+  color: #1c3f60;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
 }
+
+/* INPUT FIELDS */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccd6dd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+/* TEXTAREA */
+#textInput {
+  min-height: 100px;
+  resize: none;
+}
+
+
+
