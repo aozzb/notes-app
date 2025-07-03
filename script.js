@@ -118,4 +118,3 @@ clearBtn.addEventListener("click", function(){
     textInput.value = "";
     tagsInput.value = "";
 });
-
